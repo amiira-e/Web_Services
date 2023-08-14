@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shoprite Product Data</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <script src="{{ url_for('static', filename='getproduct.js') }}"></script>
+    <div class="container">
+        <h1>Shoprite Product Data</h1>
+        <form method="POST">
+            <label for="product_id">Enter Product ID: </label>
+            <input type="text" id="product_id" name="product_id">
+            <button type="submit">Get Data</button>
+        </form>
+        
+        <hr>
+
+        <h2>Product Data:</h2>
+        <div class="product-list">
+            {% if products_list %}
+                {% for product in products_list %}
+                    <div class="product">
+                        <p><strong>Name:</strong> {{ product['name'] }}</p>
+                        <p><strong>Price:</strong> {{ product['price'] }}</p>
+
+                        <img src="{{ product['image_url'] }}" alt="{{ product['name'] }} Image">
+                        <button class="add-to-cart" data-price="{{ product['price'] }}">Add to Cart</button>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="no-data">No product data available.</p>
+            {% endif %}
+        </div>
+ 
+</body>
+</html>
